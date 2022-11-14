@@ -1,0 +1,61 @@
+﻿@model IEnumerable<zadatak1.Models.Studenti>
+
+
+@{
+    ViewBag.Title = "Index";
+
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Lista studenata</h2>
+
+<p class="action-link">
+    <i class="fa-regular fa-square-plus"></i> @Html.ActionLink("Dodaj studenta", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.smer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.smer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.ActionLink("Promeni", "Edit", new { id = item.indeks }) |
+                @Html.ActionLink("Detalji", "Details", new { id = item.indeks }) |
+
+                @Html.ActionLink("Polagani ispiti", "Details", new { id = item.indeks }) |
+
+                @Html.ActionLink("Obrisi", "Delete", new { id = item.indeks })
+            </td>
+        </tr>
+    }
+
+</table>

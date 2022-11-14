@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StudentiDBModelStoreContainer" CdmEntityContainer="StudentiDBEntities">
+    <EntitySetMapping Name="Predmetis">
+      <EntityTypeMapping TypeName="StudentiDBModel.Predmeti">
+        <MappingFragment StoreEntitySet="Predmeti">
+          <ScalarProperty Name="sifraPredmeta" ColumnName="sifraPredmeta" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Studentis">
+      <EntityTypeMapping TypeName="StudentiDBModel.Studenti">
+        <MappingFragment StoreEntitySet="Studenti">
+          <ScalarProperty Name="indeks" ColumnName="indeks" />
+          <ScalarProperty Name="ime" ColumnName="ime" />
+          <ScalarProperty Name="prezime" ColumnName="prezime" />
+          <ScalarProperty Name="smer" ColumnName="smer" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ispitis">
+      <EntityTypeMapping TypeName="StudentiDBModel.Ispiti">
+        <MappingFragment StoreEntitySet="Ispiti">
+          <ScalarProperty Name="sifraPremeta" ColumnName="sifraPremeta" />
+          <ScalarProperty Name="indeks" ColumnName="indeks" />
+          <ScalarProperty Name="datum" ColumnName="datum" />
+          <ScalarProperty Name="ocena" ColumnName="ocena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

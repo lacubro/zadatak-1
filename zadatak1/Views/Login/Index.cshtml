@@ -1,0 +1,197 @@
+﻿@model zadatak1.Models.Korisnik
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    <style>
+        body {
+            font-family: Phantomsans, sans-serif;
+            background-color: rgba(245, 245, 245, 1);
+        }
+        #login-div {
+            position: absolute;
+            left: 40%;
+            top: 30%;
+            border: 1px solid #ccc;
+            padding: 20px 20px;
+            background-color: rgba(215, 215, 215, 1);
+        }
+        .field-validation-error {
+            color: red;
+        }
+        #login-div h3 {
+            margin: 30px 50px auto 50px;
+            padding-bottom: 50px;
+        }
+        #login-div .login-wrap {
+
+        }
+        #login-div .text-box {
+            width: 100%;
+            height: 30px;
+        }
+        #login-div .textbox {
+            margin: auto 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-login {
+            background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+            border: 0;
+            border-radius: 12px;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 2.5;
+            outline: transparent;
+            padding: 0 1rem;
+            text-align: center;
+            text-decoration: none;
+            transition: box-shadow .2s ease-in-out;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;                         
+            white-space: nowrap;
+            width: 40%;
+            margin: auto 10px;
+        }
+        .button-login:not([disabled]):focus {
+                box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(15, 0, 180, 0.8), .125rem .125rem 1rem rgba(79, 64, 249, 0.8);
+         }
+
+        .button-login:not([disabled]):hover {
+                box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(15, 0, 180, 0.8), .125rem .125rem 1rem rgba(79, 64, 249, 0.8);
+         }
+        .button-obrisi {
+            background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+            border: 0;
+            border-radius: 12px;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 2.5;
+            outline: transparent;
+            padding: 0 1rem;
+            text-align: center;
+            text-decoration: none;
+            transition: box-shadow .2s ease-in-out;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            width: 40%;
+            margin: auto 10px;
+        }
+        .button-obrisi:not([disabled]):focus {
+            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+        }
+
+        .button-obrisi:not([disabled]):hover {
+            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+        {
+            <h3>Evidencija o položenim ispitima</h3>
+            <div class="login-wrap">
+                <p>@Html.LabelFor(Model => Model.Username)</p>
+                <p class="textbox">@Html.EditorFor(Model => Model.Username)</p>
+                <p>@Html.ValidationMessageFor(Model => Model.Username)</p>
+            </div>
+            <div class="login-wrap">
+                <p>@Html.LabelFor(Model => Model.Password)</p>
+                <p class="textbox">@Html.EditorFor(Model => Model.Password)</p>
+                <p>@Html.ValidationMessageFor(Model => Model.Password)</p>
+            </div>
+            <div class="login-submit">
+                <p class="field-validation-error">@Html.DisplayFor(Model => Model.LoginErrorMessage)</p>
+                <div class="buttons">
+                    <input type="submit" name="name" value="Login" class="button-login" />
+                    <input type="reset" name="name" value="Obrisi" class="button-obrisi" />
+                </div>
+            </div>
+
+
+
+
+
+
+            @*
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">Evidencija o položenim ispitima</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(Model => Model.Username)
+                    </td>
+                    <td>
+                        @Html.EditorFor(Model => Model.Username)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(Model => Model.Username)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(Model => Model.Password)
+                    </td>
+                    <td>
+                        @Html.EditorFor(Model => Model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(Model => Model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="field-validation-error">
+                            @Html.DisplayFor(Model => Model.LoginErrorMessage)
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="name" value="Login" />
+                        <input type="reset" name="name" value="Obrisi" />
+
+                    </td>
+                </tr>
+            </table>*@
+        }
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

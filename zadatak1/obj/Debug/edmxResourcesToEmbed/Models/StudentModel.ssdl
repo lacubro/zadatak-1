@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'StudentiDB.dbo.Ispiti' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Ispiti">
+    <Key>
+      <PropertyRef Name="sifraPremeta" />
+      <PropertyRef Name="indeks" />
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="ocena" />
+    </Key>
+    <Property Name="sifraPremeta" Type="int" Nullable="false" />
+    <Property Name="indeks" Type="int" Nullable="false" />
+    <Property Name="datum" Type="date" Nullable="false" />
+    <Property Name="ocena" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Predmeti">
+    <Key>
+      <PropertyRef Name="sifraPredmeta" />
+    </Key>
+    <Property Name="sifraPredmeta" Type="int" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Studenti">
+    <Key>
+      <PropertyRef Name="indeks" />
+    </Key>
+    <Property Name="indeks" Type="int" Nullable="false" />
+    <Property Name="ime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prezime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="smer" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Ispiti_Predmeti">
+    <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
+    <End Role="Ispiti" Type="Self.Ispiti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Predmeti">
+        <PropertyRef Name="sifraPredmeta" />
+      </Principal>
+      <Dependent Role="Ispiti">
+        <PropertyRef Name="sifraPremeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ispiti_Studenti">
+    <End Role="Studenti" Type="Self.Studenti" Multiplicity="1" />
+    <End Role="Ispiti" Type="Self.Ispiti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studenti">
+        <PropertyRef Name="indeks" />
+      </Principal>
+      <Dependent Role="Ispiti">
+        <PropertyRef Name="indeks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentiDBModelStoreContainer">
+    <EntitySet Name="Predmeti" EntityType="Self.Predmeti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Studenti" EntityType="Self.Studenti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ispiti" EntityType="Self.Ispiti" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ispiti].[sifraPremeta] AS [sifraPremeta], 
+    [Ispiti].[indeks] AS [indeks], 
+    [Ispiti].[datum] AS [datum], 
+    [Ispiti].[ocena] AS [ocena]
+    FROM [dbo].[Ispiti] AS [Ispiti]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Ispiti_Predmeti" Association="Self.FK_Ispiti_Predmeti">
+      <End Role="Predmeti" EntitySet="Predmeti" />
+      <End Role="Ispiti" EntitySet="Ispiti" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ispiti_Studenti" Association="Self.FK_Ispiti_Studenti">
+      <End Role="Studenti" EntitySet="Studenti" />
+      <End Role="Ispiti" EntitySet="Ispiti" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

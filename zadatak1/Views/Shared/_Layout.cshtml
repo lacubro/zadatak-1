@@ -1,0 +1,112 @@
+﻿@{
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7c728305a5.js" crossorigin="anonymous"></script>
+    <title>@ViewBag.Title - Evidencija polozenih ispita</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .logout {
+            margin: 20px 5px;
+            float: right;
+        }
+
+        .btn-logout {
+            background: #FF4742;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            float: right;
+        }
+
+            .btn-logout:hover,
+            .btn-logout:active {
+                background-color: initial;
+                background-position: 0 0;
+                color: #FF4742;
+                text-decoration: none;
+            }
+
+        .button-logout:active {
+            opacity: .5;
+        }
+        .action-link {
+            font-size: 16px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Studenti", "Index", "Studentis", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+                    
+                    <li>@Html.ActionLink("Predmeti", "Index", "Predmetis")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+
+        <div class="logout">
+            <h3>Korisnik : @Session["userName"].ToString()</h3>
+            <a class="btn-logout" href="@Url.Action("LogOut", "Login")"> LogOut </a>
+        </div>
+
+        @RenderBody()
+        <hr />
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Evidencija o položenim ispitima</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

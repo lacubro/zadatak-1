@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Predmeti">
+    <Key>
+      <PropertyRef Name="sifraPredmeta" />
+    </Key>
+    <Property Name="sifraPredmeta" Type="Int32" Nullable="false" />
+    <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ispitis" Relationship="Self.FK_Ispiti_Predmeti" FromRole="Predmeti" ToRole="Ispiti" />
+  </EntityType>
+  <EntityType Name="Studenti">
+    <Key>
+      <PropertyRef Name="indeks" />
+    </Key>
+    <Property Name="indeks" Type="Int32" Nullable="false" />
+    <Property Name="ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="smer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ispitis" Relationship="Self.FK_Ispiti_Studenti" FromRole="Studenti" ToRole="Ispiti" />
+  </EntityType>
+  <EntityType Name="Ispiti">
+    <Key>
+      <PropertyRef Name="sifraPremeta" />
+      <PropertyRef Name="indeks" />
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="ocena" />
+    </Key>
+    <Property Name="sifraPremeta" Type="Int32" Nullable="false" />
+    <Property Name="indeks" Type="Int32" Nullable="false" />
+    <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ocena" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Predmeti" Relationship="Self.FK_Ispiti_Predmeti" FromRole="Ispiti" ToRole="Predmeti" />
+    <NavigationProperty Name="Studenti" Relationship="Self.FK_Ispiti_Studenti" FromRole="Ispiti" ToRole="Studenti" />
+  </EntityType>
+  <Association Name="FK_Ispiti_Predmeti">
+    <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
+    <End Role="Ispiti" Type="Self.Ispiti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Predmeti">
+        <PropertyRef Name="sifraPredmeta" />
+      </Principal>
+      <Dependent Role="Ispiti">
+        <PropertyRef Name="sifraPremeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ispiti_Studenti">
+    <End Role="Studenti" Type="Self.Studenti" Multiplicity="1" />
+    <End Role="Ispiti" Type="Self.Ispiti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studenti">
+        <PropertyRef Name="indeks" />
+      </Principal>
+      <Dependent Role="Ispiti">
+        <PropertyRef Name="indeks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentiDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Predmetis" EntityType="Self.Predmeti" />
+    <EntitySet Name="Studentis" EntityType="Self.Studenti" />
+    <EntitySet Name="Ispitis" EntityType="Self.Ispiti" />
+    <AssociationSet Name="FK_Ispiti_Predmeti" Association="Self.FK_Ispiti_Predmeti">
+      <End Role="Predmeti" EntitySet="Predmetis" />
+      <End Role="Ispiti" EntitySet="Ispitis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ispiti_Studenti" Association="Self.FK_Ispiti_Studenti">
+      <End Role="Studenti" EntitySet="Studentis" />
+      <End Role="Ispiti" EntitySet="Ispitis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

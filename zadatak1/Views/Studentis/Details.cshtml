@@ -1,0 +1,91 @@
+﻿@model zadatak1.Models.Studenti
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Studenti</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.prezime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.prezime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.smer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.smer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.prezime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.prezime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.smer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.smer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    
+</div>
+<p>
+    @Html.ActionLink("<-- Nazad", "Index") |
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.indeks })
+</p>
